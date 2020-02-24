@@ -7,7 +7,7 @@ import {
     SELECT_PAGE
 } from './../actions'
 
-function selectedPage (state = '1', action) {
+function selectedPage (state = 1, action) {
     switch (action.type) {
         case SELECT_PAGE:
             return action.page

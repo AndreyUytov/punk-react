@@ -38,7 +38,7 @@ function fetchBeers (page) {
         return fetch(`https://api.punkapi.com/v2/beers?page=${page}&per_page=3`)
             .then(res => res.json())
             .then(json => dispatch(successBeers(page, json)))
-            .catch(err => failureBeers(err))
+            .catch(err => dispatch(failureBeers(err)))
     }
 }
 
