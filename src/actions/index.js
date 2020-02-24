@@ -25,10 +25,10 @@ function successBeers (page, data) {
     }
 }
 
-function failureBeers (error) {
+function failureBeers (err) {
     return {
         type: FAILURE_BEERS,
-        error
+        err
     }
 }
 
@@ -48,8 +48,6 @@ function shouldFetchBeers (state, page) {
         return true
       } else if (beers.isFetching) {
         return false
-      } else {
-        return beers.didInvalidate
       }
 }
 

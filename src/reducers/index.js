@@ -18,10 +18,44 @@ function selectedPage (state = '1', action) {
 
 function beers (state = {
     isFetching: false,
-    didInvalidate: false,
-    items: []
+    isFailure: false,
+    beers: []
 }, action) {
     switch (action.type) {
-        case 
+        case REQUEST_BEERS:
+            return Object.assign({}, state, {
+                isFetching: true
+              })
+        case SUCCESS_BEERS:
+            return Object.assign({}, state, {
+                isFetching: false,
+                beers: action.beers
+              })
+        case FAILURE_BEERS:
+            return Object.assign({}, state, {
+                isFetching: false,
+                isFailure: action.err
+              })
+        default:
+            return state
     }
 }
+
+function beersByPage (state = {}, action) {
+    switch (action.type) {
+        case REQUEST_BEERS:
+        case FAILURE_BEERS:
+        case SUCCESS_BEERS:
+            return Object.assign({}, state, {
+                [action.page]: beers(state[action.page], action)
+              })
+            default:
+              return state
+    }
+}
+
+const rootReducer = combineReducers({
+    beersByPage,
+    selectedPage
+  })
+  export default rootReducer
