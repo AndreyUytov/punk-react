@@ -1,12 +1,14 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
   NavLink,
   Switch,
   Route,
   useRouteMatch
 } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 function createPageArr (page) {
+  page = +page
   if (page === 1 || page === 2) {
     return [1, 2, 3]
   } else return [page - 1, page, page + 1]
@@ -15,8 +17,8 @@ function createPageArr (page) {
 function createPageList (arr, url) {
   return arr.map((elem, i) => {
     return (
-      <li>
-        <NavLink to={`${url}/${elem}`} key={`${i}`} className='nav-list__link'
+      <li key={`${i}`}>
+        <NavLink to={`${url}/${elem}`} className='nav-list__link'
         activeClassName='nav-list__link--active'>
           {elem}
         </NavLink>
@@ -25,9 +27,20 @@ function createPageList (arr, url) {
   })
 }
 
+function NavButton (pages, setPages, prevOrNextToggle) {
+  if (prevOrNextToggle === 'prev') {
+    return (
+      <button className='navBtn' type='button' disabled = {pages[0] <=2 ? true : false} onClick = {() => setPages(pages.map( elem => elem - 1)}}>
+        Prev
+      </button>
+    )
+  }
+}
+
 function CatalogLinks (props) {
   let { path, url } = useRouteMatch()
-  const pages = createPageArr(props.page)
+  const [pages, setPages] = useState(createPageArr(props.page))
+
   return (
     <>
     {createPageList(pages, url)}
@@ -35,7 +48,7 @@ function CatalogLinks (props) {
   )
 }
 
-export default function Catalog (props) {
+function Catalog (props) {
     return (
         <>
           <div className='home-page-wrapper'>
@@ -44,10 +57,17 @@ export default function Catalog (props) {
             </p>
             <nav className='catalog-nav'>
               <ul className='layout-nav-list nav-list'>
-                <CatalogLinks />    
+                <CatalogLinks {...props}/>    
               </ul>
             </nav>
           </div>
         </>
     )
 }
+
+const mapStateToProps = store => ({
+  page: store.selectedPage
+
+})
+
+export default connect (mapStateToProps)(Catalog)
