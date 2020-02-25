@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {
   NavLink,
   Switch,
@@ -7,6 +7,8 @@ import {
   useParams
 } from 'react-router-dom'
 import { connect } from 'react-redux'
+
+import {selectPage, fetchBeersIfNeeded} from './../../actions'
 
 function createPageArr (page) {
   page = +page
@@ -61,15 +63,31 @@ function CatalogLinks (props) {
 }
 
 function CatalogBeers (props) {
+  const {path, page, dispatch, beers} = props
   let {pageNumber} = useParams()
-  console.log(pageNumber)
+  pageNumber = +pageNumber
+  useEffect(() => {
+    if (pageNumber !== page) {
+      dispatch(selectPage(pageNumber))
+      fetchBeersIfNeeded(pageNumber)
+    }
+  }, [pageNumber, page, dispatch])
+  console.log(beers)
+  function list (beers) {
+    return beers.map((elem,i) => {
+      return (
+        <li key ={i}>
+          <h3>{elem.name}</h3>
+        </li>
+      )
+    })
+  }
   return (
     <Switch>
-      <Route path={`${props.path}/:pageNumber`}>
-        <p>{pageNumber} - page</p>
-        <p>
-          path - {props.path}
-        </p>
+      <Route path={`${path}/:pageNumber`}>
+        <ul>
+          {list(beers)}
+        </ul>
       </Route>
     </Switch>
   )
@@ -93,7 +111,7 @@ function Catalog (props) {
                 выберите страницу {path}
               </Route>
               <Route path={`${path}/:pageNumber`}>
-                <CatalogBeers path={path} />
+                <CatalogBeers path={path} {...props}/>
               </Route>
             </Switch>
           </div>
@@ -102,8 +120,8 @@ function Catalog (props) {
 }
 
 const mapStateToProps = store => ({
-  page: store.selectedPage
-
+  page: store.selectedPage,
+  beers: store.beersByPage
 })
 
 export default connect (mapStateToProps)(Catalog)
