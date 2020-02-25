@@ -3,7 +3,8 @@ import {
   NavLink,
   Switch,
   Route,
-  useRouteMatch
+  useRouteMatch,
+  useParams
 } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -27,28 +28,55 @@ function createPageList (arr, url) {
   })
 }
 
-function NavButton (pages, setPages, prevOrNextToggle) {
+function NavButton ({pages, setPages, prevOrNextToggle}) {
   if (prevOrNextToggle === 'prev') {
     return (
-      <button className='navBtn' type='button' disabled = {pages[0] <=2 ? true : false} onClick = {() => setPages(pages.map( elem => elem - 1)}}>
+      <button className='navBtn'
+       type='button' disabled = {pages[0] === 1 ? true : false}
+       onClick = {() => setPages(pages.map( elem => elem - 1))}>
         Prev
+      </button>
+    )
+  } else {
+    return (
+      <button className='navBtn'
+        type='button'
+        onClick = {() => setPages(pages.map( elem => elem + 1))}>
+          Next
       </button>
     )
   }
 }
 
 function CatalogLinks (props) {
-  let { path, url } = useRouteMatch()
   const [pages, setPages] = useState(createPageArr(props.page))
 
   return (
     <>
-    {createPageList(pages, url)}
+    <NavButton pages={pages} setPages = {setPages} prevOrNextToggle='prev' />
+    {createPageList(pages, props.url)}
+    <NavButton pages={pages} setPages = {setPages} />
     </>
   )
 }
 
+function CatalogBeers (props) {
+  let {pageNumber} = useParams()
+  console.log(pageNumber)
+  return (
+    <Switch>
+      <Route path={`${props.path}/:pageNumber`}>
+        <p>{pageNumber} - page</p>
+        <p>
+          path - {props.path}
+        </p>
+      </Route>
+    </Switch>
+  )
+}
+
 function Catalog (props) {
+  let { path, url } = useRouteMatch()
     return (
         <>
           <div className='home-page-wrapper'>
@@ -57,9 +85,17 @@ function Catalog (props) {
             </p>
             <nav className='catalog-nav'>
               <ul className='layout-nav-list nav-list'>
-                <CatalogLinks {...props}/>    
+                <CatalogLinks {...props} url={url}/> 
               </ul>
             </nav>
+            <Switch>
+              <Route exact path={path}>
+                выберите страницу {path}
+              </Route>
+              <Route path={`${path}/:pageNumber`}>
+                <CatalogBeers path={path} />
+              </Route>
+            </Switch>
           </div>
         </>
     )
