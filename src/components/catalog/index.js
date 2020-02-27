@@ -77,9 +77,9 @@ function CatalogBeers (props) {
   let {pageNumber} = useParams()
   pageNumber = +pageNumber
   useEffect(() => {
+    dispatch(fetchBeersIfNeeded(pageNumber))
     if (pageNumber !== page) {
       dispatch(selectPage(pageNumber))
-      dispatch(fetchBeersIfNeeded(pageNumber))
     }
   }, [pageNumber, page, dispatch])
   
