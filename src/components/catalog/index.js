@@ -62,6 +62,16 @@ function CatalogLinks (props) {
   )
 }
 
+function BeersList ({beers}){
+  return beers.map((elem,i) => {
+    return (
+      <li key ={i}>
+        <h3>{elem.name}</h3>
+      </li>
+    )
+  })
+}
+
 function CatalogBeers (props) {
   const {path, page, dispatch, beers} = props
   let {pageNumber} = useParams()
@@ -69,24 +79,15 @@ function CatalogBeers (props) {
   useEffect(() => {
     if (pageNumber !== page) {
       dispatch(selectPage(pageNumber))
-      fetchBeersIfNeeded(pageNumber)
+      dispatch(fetchBeersIfNeeded(pageNumber))
     }
   }, [pageNumber, page, dispatch])
-  console.log(beers)
-  function list (beers) {
-    return beers.map((elem,i) => {
-      return (
-        <li key ={i}>
-          <h3>{elem.name}</h3>
-        </li>
-      )
-    })
-  }
+  
   return (
     <Switch>
       <Route path={`${path}/:pageNumber`}>
         <ul>
-          {list(beers)}
+          {beers[pageNumber] ? <BeersList beers={beers[pageNumber].beers} /> : (<li>Loading ... </li>)}
         </ul>
       </Route>
     </Switch>

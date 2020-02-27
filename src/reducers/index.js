@@ -34,7 +34,7 @@ function beers (state = {
         case FAILURE_BEERS:
             return Object.assign({}, state, {
                 isFetching: false,
-                isFailure: action.err
+                isFailure: true
               })
         default:
             return state

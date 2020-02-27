@@ -17,11 +17,11 @@ function requestBeers (page) {
     }
 }
 
-function successBeers (page, data) {
+function successBeers (page, beers) {
     return {
         type: SUCCESS_BEERS,
         page,
-        data: JSON.parse(data)
+        beers
     }
 }
 
