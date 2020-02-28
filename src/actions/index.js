@@ -25,10 +25,11 @@ function successBeers (page, beers) {
     }
 }
 
-function failureBeers (err) {
+function failureBeers (page, err) {
     return {
         type: FAILURE_BEERS,
-        err
+        err: err.message,
+        page
     }
 }
 
@@ -38,7 +39,7 @@ function fetchBeers (page) {
         return fetch(`https://api.punkapi.com/v2/beers?page=${page}&per_page=3`)
             .then(res => res.json())
             .then(json => dispatch(successBeers(page, json)))
-            .catch(err => dispatch(failureBeers(err)))
+            .catch(err => dispatch(failureBeers(page,err)))
     }
 }
 

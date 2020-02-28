@@ -12,7 +12,7 @@ import {selectPage, fetchBeersIfNeeded} from './../../actions'
 
 function createPageArr (page) {
   page = +page
-  if (page === 1 || page === 2) {
+  if (page <= 2) {
     return [1, 2, 3]
   } else return [page - 1, page, page + 1]
 }
@@ -51,7 +51,7 @@ function NavButton ({pages, setPages, prevOrNextToggle}) {
 }
 
 function CatalogLinks (props) {
-  const [pages, setPages] = useState(createPageArr(props.page))
+  const [pages, setPages] = useState(createPageArr(props.selectedPage))
 
   return (
     <>
@@ -73,21 +73,37 @@ function BeersList ({beers}){
 }
 
 function CatalogBeers (props) {
-  const {path, page, dispatch, beers} = props
+  const {path, selectedPage, dispatch, beers, isFetching, isFailure} = props
   let {pageNumber} = useParams()
   pageNumber = +pageNumber
   useEffect(() => {
     dispatch(fetchBeersIfNeeded(pageNumber))
-    if (pageNumber !== page) {
+    if (pageNumber !== selectedPage) {
       dispatch(selectPage(pageNumber))
     }
-  }, [pageNumber, page, dispatch])
-  
+  }, [pageNumber, selectedPage, dispatch])
+
+  function renderBeerList () {
+    if (isFetching && beers.length === 0) {
+      return (
+        <h2>...Loading</h2>
+      )
+    } else if (isFailure) {
+      return (
+        <h2>Something wrong!</h2>
+      )
+    } else {
+      return (
+        <BeersList {...props}/>
+      )
+    }
+  }
+
   return (
     <Switch>
       <Route path={`${path}/:pageNumber`}>
         <ul>
-          {beers[pageNumber] ? <BeersList beers={beers[pageNumber].beers} /> : (<li>Loading ... </li>)}
+          {renderBeerList()}
         </ul>
       </Route>
     </Switch>
@@ -120,9 +136,15 @@ function Catalog (props) {
     )
 }
 
-const mapStateToProps = store => ({
-  page: store.selectedPage,
-  beers: store.beersByPage
-})
+const mapStateToProps = store => {
+  const { selectedPage, beersByPage } = store
+  const { isFetching, isFailure, beers } = beersByPage[selectedPage] || {isFetching: true, isFailure: false, beers:[]}
+  return {
+    selectedPage,
+    beers,
+    isFetching,
+    isFailure
+  }
+}
 
 export default connect (mapStateToProps)(Catalog)
