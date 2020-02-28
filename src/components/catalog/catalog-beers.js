@@ -12,7 +12,7 @@ function BeersList ({beers}){
   return beers.map((elem,i) => {
     return (
       <li key ={i}>
-        <h3>{elem.name}</h3>
+        <h3>{elem.id}</h3>
       </li>
     )
   })

@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux'
 
+import {indexById} from './../selectors'
+
 import {
     REQUEST_BEERS,
     SUCCESS_BEERS,
@@ -29,7 +31,7 @@ function beers (state = {
         case SUCCESS_BEERS:
             return Object.assign({}, state, {
                 isFetching: false,
-                beers: action.beers
+                beers: action.beers.map(elem => elem.id)
               })
         case FAILURE_BEERS:
             return Object.assign({}, state, {
@@ -37,6 +39,15 @@ function beers (state = {
                 isFailure: true,
                 err: action.err
               })
+        default:
+            return state
+    }
+}
+
+function allBeers (state = {}, action) {
+    switch (action.type) {
+        case SUCCESS_BEERS: 
+            return {...state, ...indexById(action.beers)}
         default:
             return state
     }
@@ -57,6 +68,7 @@ function beersByPage (state = {}, action) {
 
 const rootReducer = combineReducers({
     beersByPage,
-    selectedPage
+    selectedPage,
+    allBeers
   })
   export default rootReducer

@@ -2,7 +2,8 @@ import React from 'react'
 import {
   Switch,
   Route,
-  useRouteMatch
+  useRouteMatch,
+  Redirect
 } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -25,7 +26,7 @@ function Catalog (props) {
             </nav>
             <Switch>
               <Route exact path={path}>
-                выберите страницу {path}
+                <Redirect to={`${url}/${props.selectedPage}`} />
               </Route>
               <Route path={`${path}/:pageNumber`}>
                 <CatalogBeers path={path} {...props}/>
