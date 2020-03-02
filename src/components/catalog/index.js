@@ -14,9 +14,6 @@ import {getBeers} from './../../selectors'
 
 function Catalog (props) {
   let { path, url } = useRouteMatch()
-  props.beers.forEach(element => {
-    console.log(element.name)
-  });
     return (
         <>
           <div className='home-page-wrapper'>
@@ -46,7 +43,7 @@ const mapStateToProps = store => {
   const { isFetching, isFailure} = beersByPage[selectedPage] || {isFetching: true, isFailure: false}
   return {
     selectedPage,
-    beers: getBeers(store, selectedPage) || [],
+    beers: getBeers(store, selectedPage),
     isFetching,
     isFailure
   }

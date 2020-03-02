@@ -6,13 +6,21 @@ import {
 } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import {selectPage, fetchBeersIfNeeded} from './../../actions'
+import {selectPage, fetchBeersIfNeeded, addToBasket} from './../../actions'
 
-function BeersList ({beers}){
-  return beers.map((elem,i) => {
+function BeersList ({beers, dispatch}) {
+  function onBuyBtnClick (evt, id) {
+    evt.preventDefault()
+    dispatch(addToBasket(id))
+    evt.target.textContent = 'Перейдите к корзине'
+    evt.target.disabled = true
+  }
+  return beers.map((elem, i) => {
     return (
       <li key ={i}>
         <h3>{elem.name}</h3>
+        <button onClick={(evt) => onBuyBtnClick(evt, elem.id)}
+           type='button' className='buy-beer'>Add to Basket</button>
       </li>
     )
   })
@@ -44,6 +52,8 @@ export default function CatalogBeers (props) {
       )
     }
   }
+
+
 
   return (
     <Switch>

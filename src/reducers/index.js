@@ -6,7 +6,9 @@ import {
     REQUEST_BEERS,
     SUCCESS_BEERS,
     FAILURE_BEERS,
-    SELECT_PAGE
+    SELECT_PAGE,
+    ADD_TO_BASKET,
+    REMOVE_FROM_BASKET
 } from './../actions'
 
 function selectedPage (state = 1, action) {
@@ -66,9 +68,19 @@ function beersByPage (state = {}, action) {
     }
 }
 
+function basket (state = [], action) {
+    switch (action.type) {
+        case ADD_TO_BASKET:
+            return [...state, action.id]
+        default:
+            return state
+    }
+}
+
 const rootReducer = combineReducers({
     beersByPage,
     selectedPage,
-    allBeers
+    allBeers,
+    basket
   })
   export default rootReducer

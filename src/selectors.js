@@ -3,12 +3,11 @@ export const getBeersById = (state, id) => {
 }
   
 export const getBeers = (state, page) => {
-  
   if (state.beersByPage[page]) {
     return state.beersByPage[page].beersId.map((id) => {
       return getBeersById(state, id)
     })
-  }
+  } else return []
 }
 
 export function indexById (arr) {
