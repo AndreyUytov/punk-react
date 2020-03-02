@@ -21,7 +21,7 @@ function selectedPage (state = 1, action) {
 function beers (state = {
     isFetching: false,
     isFailure: false,
-    beers: []
+    beersId: []
 }, action) {
     switch (action.type) {
         case REQUEST_BEERS:
@@ -31,7 +31,7 @@ function beers (state = {
         case SUCCESS_BEERS:
             return Object.assign({}, state, {
                 isFetching: false,
-                beers: action.beers.map(elem => elem.id)
+                beersId: action.beers.map(elem => elem.id)
               })
         case FAILURE_BEERS:
             return Object.assign({}, state, {

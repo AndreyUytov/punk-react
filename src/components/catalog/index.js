@@ -10,9 +10,13 @@ import { connect } from 'react-redux'
 
 import CatalogLinks from './../catalog/catalog-links'
 import CatalogBeers from './../catalog/catalog-beers'
+import {getBeers} from './../../selectors'
 
 function Catalog (props) {
   let { path, url } = useRouteMatch()
+  props.beers.forEach(element => {
+    console.log(element.name)
+  });
     return (
         <>
           <div className='home-page-wrapper'>
@@ -39,10 +43,10 @@ function Catalog (props) {
 
 const mapStateToProps = store => {
   const { selectedPage, beersByPage } = store
-  const { isFetching, isFailure, beers } = beersByPage[selectedPage] || {isFetching: true, isFailure: false, beers:[]}
+  const { isFetching, isFailure} = beersByPage[selectedPage] || {isFetching: true, isFailure: false}
   return {
     selectedPage,
-    beers,
+    beers: getBeers(store, selectedPage) || [],
     isFetching,
     isFailure
   }

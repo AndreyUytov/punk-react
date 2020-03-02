@@ -1,11 +1,14 @@
 export const getBeersById = (state, id) => {
-    return state.beers[id]
+    return state.allBeers[id]
 }
   
 export const getBeers = (state, page) => {
-  return state.beersByPage[page].beers.map((id) => {
-    return getBeersById(state, id)
-  })
+  
+  if (state.beersByPage[page]) {
+    return state.beersByPage[page].beersId.map((id) => {
+      return getBeersById(state, id)
+    })
+  }
 }
 
 export function indexById (arr) {
