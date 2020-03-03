@@ -72,6 +72,13 @@ function basket (state = [], action) {
     switch (action.type) {
         case ADD_TO_BASKET:
             return [...state, action.id]
+        case REMOVE_FROM_BASKET:
+            return [...state.reduce((result, currentElem) => {
+                if (currentElem !== action.id) {
+                    result.push(currentElem)
+                }
+                return result
+            }, [])]
         default:
             return state
     }

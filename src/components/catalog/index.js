@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 
 import CatalogLinks from './../catalog/catalog-links'
 import CatalogBeers from './../catalog/catalog-beers'
-import {getBeers} from './../../selectors'
+import {getAllBeers} from './../../selectors'
 
 function Catalog (props) {
   let { path, url } = useRouteMatch()
@@ -40,10 +40,10 @@ function Catalog (props) {
 
 const mapStateToProps = store => {
   const { selectedPage, beersByPage } = store
-  const { isFetching, isFailure} = beersByPage[selectedPage] || {isFetching: true, isFailure: false}
+  const { isFetching, isFailure, beersId} = beersByPage[selectedPage] || {isFetching: true, isFailure: false, beersId:[]}
   return {
     selectedPage,
-    beers: getBeers(store, selectedPage),
+    beers: getAllBeers(beersId, store),
     isFetching,
     isFailure
   }
