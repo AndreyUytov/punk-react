@@ -11,21 +11,17 @@ import Basket from './../components/basket'
 
 const routes = (
     <Switch>
+      <Layout>
         <Route exact path = '/'>
-            <Layout>
-                <Home />
-            </Layout>
+          <Home />
         </Route>
         <Route path = '/catalog'>
-            <Layout>
-                <Catalog />
-            </Layout>
+          <Catalog />
         </Route>
         <Route path = '/basket'>
-            <Layout>
-                <Basket />
-            </Layout>
+          <Basket />
         </Route>
+      </Layout>
     </Switch>
 )
 
