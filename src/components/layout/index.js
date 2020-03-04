@@ -3,12 +3,10 @@ import {
   NavLink
 } from 'react-router-dom'
 
-import './style.scss'
-
 export default function Layout(props) {
     return (
         <>
-          <header className='layout-header conteiner'>
+          <header className='layout-header container'>
             <h1 className='layout-title'>PUNK-LOGO</h1>
             <nav className='layout-nav'>
               <ul className='layout-nav-list nav-list'>
@@ -19,13 +17,13 @@ export default function Layout(props) {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink exact to = '/catalog' className='nav-list__link'
+                  <NavLink to = '/catalog' className='nav-list__link'
                    activeClassName= 'nav-list__link--active'>
                     Catalog
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink exact to = '/basket' className='nav-list__link'
+                  <NavLink to = '/basket' className='nav-list__link'
                    activeClassName= 'nav-list__link--active'>
                     Basket
                   </NavLink>
@@ -33,10 +31,10 @@ export default function Layout(props) {
               </ul>
             </nav>
           </header>
-          <main className='layout-main conteiner'>
+          <main className='layout-main container'>
             {props.children}
           </main>
-          <footer className='layout-footer conteiner'>
+          <footer className='layout-footer container'>
             <ul className='layout-footer-list'>
               <li>
                 24/02/20

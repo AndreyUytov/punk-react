@@ -3,10 +3,10 @@ import {Provider} from 'react-redux'
 import {BrowserRouter as Router} from 'react-router-dom'
 
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
-import store from './store'
-import routes from './routes'
+import store from './../store'
+import routes from './../routes'
 
 
 function App() {

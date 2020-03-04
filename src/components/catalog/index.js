@@ -20,11 +20,6 @@ function Catalog (props) {
             <p>
               Это страница-каталог
             </p>
-            <nav className='catalog-nav'>
-              <ul className='layout-nav-list nav-list'>
-                <CatalogLinks {...props} url={url}/> 
-              </ul>
-            </nav>
             <Switch>
               <Route exact path={path}>
                 <Redirect to={`${url}/${props.selectedPage}`} />
@@ -33,6 +28,11 @@ function Catalog (props) {
                 <CatalogBeers path={path} {...props}/>
               </Route>
             </Switch>
+            <nav className='catalog-nav'>
+              <ul className='layout-nav-list nav-list'>
+                <CatalogLinks {...props} url={url}/> 
+              </ul>
+            </nav>
           </div>
         </>
     )
