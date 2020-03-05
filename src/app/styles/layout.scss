@@ -1,4 +1,6 @@
 .layout-header {
+    margin-top: 20px;
+    margin-bottom: 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -24,20 +26,14 @@
 }
 
 .nav-list__link {
-    @include flex-block;
-    padding-bottom: 5px;
-
-    font-size: 18px;
-
+    font-size: 20px;
     &--active {
         border-bottom: 2px #f99406 solid;
     }
-    &:hover {
-        color: $btnThema;
-    }
-    &:active {
-        color: grey;
-    }
+}
+
+.layout-footer {
+    margin-top: 20px;
 }
 
 .layout-footer-list {

@@ -11,19 +11,19 @@ export default function Layout(props) {
             <nav className='layout-nav'>
               <ul className='layout-nav-list nav-list'>
                 <li>
-                  <NavLink exact to = '/' className='nav-list__link'
+                  <NavLink exact to = '/' className='nav-list__link link'
                    activeClassName='nav-list__link--active'>
                     Home
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to = '/catalog' className='nav-list__link'
+                  <NavLink to = '/catalog' className='nav-list__link link'
                    activeClassName= 'nav-list__link--active'>
                     Catalog
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to = '/basket' className='nav-list__link'
+                  <NavLink to = '/basket' className='nav-list__link link'
                    activeClassName= 'nav-list__link--active'>
                     Basket
                   </NavLink>

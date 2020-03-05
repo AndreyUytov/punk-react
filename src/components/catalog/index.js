@@ -15,11 +15,11 @@ import {getAllBeers} from './../../selectors'
 function Catalog (props) {
   let { path, url } = useRouteMatch()
     return (
-        <>
-          <div className='home-page-wrapper'>
-            <p>
-              Это страница-каталог
-            </p>
+        <div className='catalog-block-page'>
+          <div className='catalog-filters'>
+            FILTERS
+          </div>
+          <div className='catalog-beers-wrapper'>
             <Switch>
               <Route exact path={path}>
                 <Redirect to={`${url}/${props.selectedPage}`} />
@@ -28,13 +28,9 @@ function Catalog (props) {
                 <CatalogBeers path={path} {...props}/>
               </Route>
             </Switch>
-            <nav className='catalog-nav'>
-              <ul className='layout-nav-list nav-list'>
-                <CatalogLinks {...props} url={url}/> 
-              </ul>
-            </nav>
+            {props.isFetching === false ? (<CatalogLinks {...props} url={url}/>) : ''}
           </div>
-        </>
+        </div>
     )
 }
 

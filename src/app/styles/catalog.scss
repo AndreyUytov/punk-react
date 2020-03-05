@@ -1,0 +1,125 @@
+.catalog-block-page {
+    @include flex-block;
+    justify-content: space-between;
+}
+
+.catalog-beers-wrapper {
+    @include flex-block;
+    flex-direction: column;
+}
+
+.catalog-nav {
+    @include flex-block;
+}
+
+.nav-list {
+    width: 250px;
+}
+
+.navBtn {
+    width: 50px;
+    height: 30px;
+}
+
+.link-page {
+    padding: 5px;
+    width: 30px;
+
+    color: $btnThema;
+    border: 1px solid white;
+    &:hover:not(.link-page--active) {
+        background-color: $btnThema;
+        color:white;
+    }
+    &--active {
+        color: $linkThema;
+        border: 1px dashed $linkThema;
+        background-color: rgb(27, 20, 20);
+        cursor: default;
+        &:hover {
+            color:$linkThema;
+        }
+    }
+}
+
+.catalog-beers__list {
+    @include ul-reset;
+    @include flex-block;
+    width: 960px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.cart {
+    width: 300px;
+    height: 420px;
+    padding: 15px;
+    @include flex-block;
+    flex-direction: column;
+    align-items: flex-start;
+
+    border: 1px solid $btnThema;
+    background-color: rgb(110, 102, 102);
+    &:hover {
+        box-shadow: 10px 10px 20px $btnThema;
+    }
+}
+
+.cart__title {
+    margin: 0;
+    padding: 10px;
+
+    align-self: center;
+
+    color: $linkThema;
+    font-size: 20px;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.img-wrapper {
+    margin-top: 15px;
+
+    display: flex;
+}
+
+.catalog-beers__img {
+    object-fit: contain;
+    max-width: 80px;
+    height: auto;
+    max-height: 314px;
+    margin-right: 15px;
+}
+
+.cart-param {
+    @include flex-block;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.cart-param p {
+    margin: 0;
+    margin-bottom: 5px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    
+    font-weight: normal;
+    font-style: italic;
+    color: $btnThema;
+    text-align: start;
+}
+
+.cart-param b {
+    font-size: 17px;
+    color:black;
+    font-weight: 600;
+}
+
+.buy-beer-btn {
+    margin-top: auto;
+}

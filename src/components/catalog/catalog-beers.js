@@ -4,6 +4,7 @@ import {
   Route,
   useParams
 } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import {selectPage, fetchBeersIfNeeded, addToBasket} from './../../actions'
@@ -12,15 +13,29 @@ function BeersList ({beers, dispatch}) {
   function onBuyBtnClick (evt, id) {
     evt.preventDefault()
     dispatch(addToBasket(id))
-    evt.target.textContent = 'Перейдите к корзине'
-    evt.target.disabled = true
+    evt.target.dataset.display = 'none'
+    evt.target.nextElementSibling.dataset.display = 'true'
   }
   return beers.map((elem, i) => {
     return (
-      <li key ={i}>
-        <h3>{elem.name}</h3>
-        <button onClick={(evt) => onBuyBtnClick(evt, elem.id)}
-           type='button' className='buy-beer'>Add to Basket</button>
+      <li key ={i} className='cart'>
+        <Link to={`/item/${elem.id}`} className='cart__title link'>{elem.name}</Link>
+        <div className='img-wrapper'>
+          <img className='catalog-beers__img' src={elem.image_url}
+            alt = 'item pic'/>
+          <div className='cart-param'>
+            <p><b>First brewed:</b> {elem.first_brewed}</p>
+            <p><b>Volume:</b> {elem.volume.value} {elem.volume.unit}</p>
+            <p><b>Tags:</b> {elem.tagline}</p>
+            <p><b>Description:</b> {`${elem.description.slice(0,100)} ...`} 
+                <Link to={`/item/${elem.id}`} className='link cart-param__link'>...more</Link>
+            </p>
+            <button onClick={(evt) => onBuyBtnClick(evt, elem.id)}
+              data-display='true'
+              type='button' className='buy-beer-btn btn'>Add to Basket</button>
+            <Link data-display='none' to='/basket' className='buy-beer-btn btn'>Link to Basket</Link>
+          </div>
+        </div>
       </li>
     )
   })
@@ -58,7 +73,7 @@ export default function CatalogBeers (props) {
   return (
     <Switch>
       <Route path={`${path}/:pageNumber`}>
-        <ul>
+        <ul className='catalog-beers__list'>
           {renderBeerList()}
         </ul>
       </Route>

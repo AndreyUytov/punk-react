@@ -46,6 +46,8 @@ input[type="radio"].visually-hidden {
 }
 
 .btn {
+	padding: 5px;
+
     display: flex;
     justify-content: center;
 	align-items: center;
@@ -53,18 +55,46 @@ input[type="radio"].visually-hidden {
 	color: white;
 
 	background-color: $btnThema;
-	border: none;
+	border: 1px solid transparent;
 	cursor: pointer;
 	&:hover {
-		background-color: $btnThemaAct;
+		background-color: transparent;
+		border: 1px solid white;
+		color: $btnThema;
+		background-color: black;
 	}
 	&:active {
 		transform: scale(1.1);
 	}
+	&:disabled {
+		background-color: grey;
+		cursor: default;
+		box-shadow: none;
+		color: white;
+		border: 1px solid transparent;
+	}
 }
 
 .container {
-	width: 1150px;
+	width: 1300px;
     margin: 0 auto;
     padding: 0 25px;
+}
+
+.link {
+	@include flex-block;
+    padding-bottom: 5px;
+
+    font-size: 18px;
+
+    &:hover {
+		color: $btnThema;
+    }
+    &:active {
+        color: grey;
+    }
+}
+
+*[data-display='none'] {
+	display: none;
 }

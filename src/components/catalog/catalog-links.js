@@ -15,8 +15,8 @@ function createPageList (arr, url) {
   return arr.map((elem, i) => {
       return (
       <li key={`${i}`}>
-          <NavLink to={`${url}/${elem}`} className='nav-list__link'
-          activeClassName='nav-list__link--active'>
+          <NavLink to={`${url}/${elem}`} className='link link-page'
+          activeClassName='link-page--active'>
           {elem}
           </NavLink>
       </li>
@@ -27,7 +27,7 @@ function createPageList (arr, url) {
 function NavButton ({pages, setPages, prevOrNextToggle}) {
   if (prevOrNextToggle === 'prev') {
       return (
-      <button className='navBtn'
+      <button className='navBtn btn'
           type='button' disabled = {pages[0] === 1 ? true : false}
           onClick = {() => setPages(pages.map( elem => elem - 1))}>
           Prev
@@ -35,7 +35,7 @@ function NavButton ({pages, setPages, prevOrNextToggle}) {
       )
   } else {
       return (
-      <button className='navBtn'
+      <button className='navBtn btn'
           type='button'
           onClick = {() => setPages(pages.map( elem => elem + 1))}>
           Next
@@ -49,9 +49,13 @@ export default function CatalogLinks (props) {
 
   return (
       <>
-      <NavButton pages={pages} setPages = {setPages} prevOrNextToggle='prev' />
-      {createPageList(pages, props.url)}
-      <NavButton pages={pages} setPages = {setPages} />
+      <nav className='catalog-nav'>
+        <ul className='layout-nav-list nav-list'>
+          <NavButton pages={pages} setPages = {setPages} prevOrNextToggle='prev' />
+          {createPageList(pages, props.url)}
+          <NavButton pages={pages} setPages = {setPages} />
+        </ul>
+      </nav>
       </>
   )
 }
