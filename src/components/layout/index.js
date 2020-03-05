@@ -3,6 +3,8 @@ import {
   NavLink
 } from 'react-router-dom'
 
+import BasketWidget from './../widgets/basket-widget'
+
 export default function Layout(props) {
     return (
         <>
@@ -25,7 +27,7 @@ export default function Layout(props) {
                 <li>
                   <NavLink to = '/basket' className='nav-list__link link'
                    activeClassName= 'nav-list__link--active'>
-                    Basket
+                    Basket <BasketWidget />
                   </NavLink>
                 </li>
               </ul>

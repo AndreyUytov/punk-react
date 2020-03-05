@@ -35,13 +35,14 @@ function Catalog (props) {
 }
 
 const mapStateToProps = store => {
-  const { selectedPage, beersByPage } = store
+  const { selectedPage, beersByPage, basket } = store
   const { isFetching, isFailure, beersId} = beersByPage[selectedPage] || {isFetching: true, isFailure: false, beersId:[]}
   return {
     selectedPage,
     beers: getAllBeers(beersId, store),
     isFetching,
-    isFailure
+    isFailure,
+    basket
   }
 }
 

@@ -1,0 +1,26 @@
+.basket-list {
+    @include ul-reset;
+    @include flex-block;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+
+.basket__item {
+    width: 70%;
+    max-height: 40px;
+    margin-bottom: 10px;
+
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    
+    &:hover {
+        background-color: rgb(110, 102, 102);
+    }
+}
+
+.basket-btn--remove {
+    margin-left: auto;
+    margin-right: 10px;
+}

@@ -8,10 +8,11 @@ function Basket (props) {
     return (
         <>
           <div className='basket-page-wrapper'>
-            <p>
-              Это страница-корзина
-            </p>
-            <BasketList {...props} />
+            {
+              props.basket.length === 0 ?
+              (<p>Сart is empty</p>) :
+              (<BasketList {...props} />)
+            }
           </div>
         </>
     )

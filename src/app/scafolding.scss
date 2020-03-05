@@ -76,7 +76,7 @@ input[type="radio"].visually-hidden {
 }
 
 .container {
-	width: 1300px;
+	width: 1250px;
     margin: 0 auto;
     padding: 0 25px;
 }
@@ -93,8 +93,4 @@ input[type="radio"].visually-hidden {
     &:active {
         color: grey;
     }
-}
-
-*[data-display='none'] {
-	display: none;
 }

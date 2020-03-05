@@ -9,13 +9,12 @@ import PropTypes from 'prop-types'
 
 import {selectPage, fetchBeersIfNeeded, addToBasket} from './../../actions'
 
-function BeersList ({beers, dispatch}) {
+function BeersList ({beers, dispatch, basket}) {
   function onBuyBtnClick (evt, id) {
     evt.preventDefault()
     dispatch(addToBasket(id))
-    evt.target.dataset.display = 'none'
-    evt.target.nextElementSibling.dataset.display = 'true'
   }
+
   return beers.map((elem, i) => {
     return (
       <li key ={i} className='cart'>
@@ -30,10 +29,12 @@ function BeersList ({beers, dispatch}) {
             <p><b>Description:</b> {`${elem.description.slice(0,100)} ...`} 
                 <Link to={`/item/${elem.id}`} className='link cart-param__link'>...more</Link>
             </p>
-            <button onClick={(evt) => onBuyBtnClick(evt, elem.id)}
-              data-display='true'
-              type='button' className='buy-beer-btn btn'>Add to Basket</button>
-            <Link data-display='none' to='/basket' className='buy-beer-btn btn'>Place your order</Link>
+            {
+              basket.includes(elem.id) ? 
+            (<Link to='/basket' className='buy-beer-btn btn'>Place your order</Link>) :
+              (<button onClick={(evt) => onBuyBtnClick(evt, elem.id)}
+              type='button' className='buy-beer-btn btn'>Add to Basket</button>)
+            }            
           </div>
         </div>
       </li>
@@ -87,5 +88,6 @@ CatalogBeers.propTypes = {
   dispatch: PropTypes.func.isRequired, 
   beers: PropTypes.array.isRequired, 
   isFetching: PropTypes.bool.isRequired, 
-  isFailure: PropTypes.bool.isRequired
+  isFailure: PropTypes.bool.isRequired,
+  basket: PropTypes.array.isRequired
 }
