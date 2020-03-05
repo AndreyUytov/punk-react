@@ -52,7 +52,7 @@ function failureBeers (page, err) {
 function fetchBeers (page) {
     return dispatch => {
         dispatch(requestBeers(page))
-        return fetch(`https://api.punkapi.com/v2/beers?page=${page}&per_page=3`)
+        return fetch(`https://api.punkapi.com/v2/beers?page=${page}&per_page=5`)
             .then(res => res.json())
             .then(json => dispatch(successBeers(page, json)))
             .catch(err => dispatch(failureBeers(page,err)))

@@ -33,7 +33,7 @@ function BeersList ({beers, dispatch}) {
             <button onClick={(evt) => onBuyBtnClick(evt, elem.id)}
               data-display='true'
               type='button' className='buy-beer-btn btn'>Add to Basket</button>
-            <Link data-display='none' to='/basket' className='buy-beer-btn btn'>Link to Basket</Link>
+            <Link data-display='none' to='/basket' className='buy-beer-btn btn'>Place your order</Link>
           </div>
         </div>
       </li>
