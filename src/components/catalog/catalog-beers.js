@@ -25,8 +25,11 @@ function BeersList ({beers, dispatch, basket}) {
           <div className='cart-param'>
             <p><b>First brewed:</b> {elem.first_brewed}</p>
             <p><b>Volume:</b> {elem.volume.value} {elem.volume.unit}</p>
-            <p><b>Tags:</b> {elem.tagline}</p>
-            <p><b>Description:</b> {`${elem.description.slice(0,100)} ...`} 
+            <p><b>ABV:</b> {elem.abv}</p>
+            <p><b>IBU:</b> {elem.ibu}</p>
+            <p><b>EBC:</b> {elem.ebc}</p>
+            <p className='cart-param__description'><b>Tags:</b> {elem.tagline}</p>
+            <p className='cart-param__description'><b>Description:</b> {`${elem.description.slice(0,60)} ...`} 
                 <Link to={`/item/${elem.id}`} className='link cart-param__link'>...more</Link>
             </p>
             {

@@ -10,7 +10,7 @@ function Basket (props) {
           <div className='basket-page-wrapper'>
             {
               props.basket.length === 0 ?
-              (<p>Сart is empty</p>) :
+              (<p className='basket-default'>Сart is empty</p>) :
               (<BasketList {...props} />)
             }
           </div>

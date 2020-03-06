@@ -20,7 +20,7 @@ html {
 body {
 	color: white;
 	font-size: 16px;
-  	background-color:$behinThema;
+	background-color:$behinThema;
 }
 
 .content-box-component {
@@ -78,7 +78,15 @@ input[type="radio"].visually-hidden {
 .container {
 	width: 1250px;
     margin: 0 auto;
-    padding: 0 25px;
+	padding: 0 25px;
+}
+
+.App {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background-image: url('./bg.png');
+    background-size: cover;
 }
 
 .link {

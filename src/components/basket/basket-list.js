@@ -29,9 +29,15 @@ function BasketList (props) {
 	}
 
 	return (
-		<ul className='basket-list'>
-			{renderList()}
-		</ul>
+		<>
+			<ul className='basket-list'>
+				{renderList()}
+			</ul>
+			<div className='basket-form-wrapper'>
+				<button className='btn basket-btn--submit-order'>Submit order</button>
+			</div>
+		</>
+		
 	)
 }
 

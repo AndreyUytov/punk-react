@@ -4,12 +4,15 @@ import {
 } from 'react-router-dom'
 
 import BasketWidget from './../widgets/basket-widget'
+import logo from './../../app/logo.svg'
 
 export default function Layout(props) {
     return (
         <>
           <header className='layout-header container'>
-            <h1 className='layout-title'>PUNK-LOGO</h1>
+            <h1 className='layout-title'>
+              <img src={logo} className="App-logo" alt="logo" />
+              PUNK-LOGO</h1>
             <nav className='layout-nav'>
               <ul className='layout-nav-list nav-list'>
                 <li>

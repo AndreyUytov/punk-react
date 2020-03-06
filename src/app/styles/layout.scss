@@ -10,6 +10,10 @@
     margin: 0;
     padding: 0;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     font-style: italic;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
@@ -33,7 +37,7 @@
 }
 
 .layout-footer {
-    margin-top: 20px;
+    margin-top: auto;
 }
 
 .layout-footer-list {
