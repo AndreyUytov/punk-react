@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 
 import CatalogLinks from './../catalog/catalog-links'
 import CatalogBeers from './../catalog/catalog-beers'
+import Filter from './catalog-filters'
 import {getAllBeers} from './../../selectors'
 
 function Catalog (props) {
@@ -17,7 +18,7 @@ function Catalog (props) {
     return (
         <div className='catalog-block-page'>
           <div className='catalog-filters'>
-            FILTERS
+            <Filter />
           </div>
           <div className='catalog-beers-wrapper'>
             <Switch>

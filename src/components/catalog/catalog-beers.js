@@ -21,7 +21,7 @@ function BeersList ({beers, dispatch, basket}) {
         <Link to={`/item/${elem.id}`} className='cart__title link'>{elem.name}</Link>
         <div className='img-wrapper'>
           <img className='catalog-beers__img' src={elem.image_url}
-            alt = 'item pic'/>
+            alt = 'beer pic'/>
           <div className='cart-param'>
             <p><b>First brewed:</b> {elem.first_brewed}</p>
             <p><b>Volume:</b> {elem.volume.value} {elem.volume.unit}</p>
